@@ -28,9 +28,17 @@ class PasienController extends Controller
         $statusGd = $user->latestMonitorGd->status ?? 'Belum ada data';
         $statusImt = $user->latestMonitorImt->status ?? 'Belum ada data';
 
-        $nilaiTd = $user->latestMonitorTd->sistolik . '/' . $user->latestMonitorTd->diastolik . ' mmHg' ?? null;
-        $nilaiGd = $user->latestMonitorGd->gula_darah . ' mg/dL' ?? null;
-        $nilaiImt = $user->latestMonitorImt->imt . ' kg/m²' ?? null;
+        $nilaiTd = $user->latestMonitorTd 
+            ? $user->latestMonitorTd->sistolik . '/' . $user->latestMonitorTd->diastolik . ' mmHg' 
+            : '--';
+
+        $nilaiGd = $user->latestMonitorGd 
+            ? $user->latestMonitorGd->gula_darah . ' mg/dL' 
+            : '--';
+
+        $nilaiImt = $user->latestMonitorImt 
+            ? $user->latestMonitorImt->imt . ' kg/m²' 
+            : '--';
         
         return response()->json([
             'statusCode' => 200,
