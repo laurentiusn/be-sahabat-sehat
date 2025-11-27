@@ -17,9 +17,18 @@ class GambarTips extends Model
         'id_tips',
         'path_gambar',
     ];
+    protected $appends = ['url'];
 
     public function tips(): BelongsTo
     {
         return $this->belongsTo(Tips::class, 'id_tips', 'id');
+    }
+    public function getUrlAttribute()
+    {
+        // Pastikan path_gambar tidak kosong
+        if ($this->path_gambar) {
+            return url('storage/' . $this->path_gambar);
+        }
+        return null;
     }
 }
