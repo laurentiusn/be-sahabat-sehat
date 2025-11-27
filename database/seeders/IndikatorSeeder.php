@@ -23,19 +23,19 @@ class IndikatorSeeder extends Seeder
             [
                 'type' => 'gd',
                 'status' => 'NORMAL',
-                'range' => json_encode(['min' => 70, 'max' => 99]),
+                'range' => ['min' => 70, 'max' => 99],
                 'color_hex' => '#28a745', // Hijau
             ],
             [
                 'type' => 'gd',
                 'status' => 'WASPADA',
-                'range' => json_encode(['min' => 100, 'max' => 125]),
+                'range' => ['min' => 100, 'max' => 125],
                 'color_hex' => '#ffc107', // Kuning/Oranye
             ],
             [
                 'type' => 'gd',
                 'status' => 'TINGGI',
-                'range' => json_encode(['min' => 126, 'max' => null]), // >= 126
+                'range' => ['min' => 126, 'max' => null], // >= 126
                 'color_hex' => '#dc3545', // Merah
             ],
         ];
@@ -45,13 +45,13 @@ class IndikatorSeeder extends Seeder
             [
                 'type' => 'imt',
                 'status' => 'UNDERWEIGHT',
-                'range' => json_encode(['min' => null, 'max' => 18.4]), // < 18.5
+                'range' => ['min' => null, 'max' => 18.4], // < 18.5
                 'color_hex' => '#dc3545', // Merah (Kurang gizi biasanya merah)
             ],
             [
                 'type' => 'imt',
                 'status' => 'NORMOWEIGHT',
-                'range' => json_encode(['min' => 18.5, 'max' => 22.9]),
+                'range' => ['min' => 18.5, 'max' => 22.9],
                 'color_hex' => '#28a745', // Hijau
             ],
             [
@@ -59,13 +59,13 @@ class IndikatorSeeder extends Seeder
                 'status' => 'OVERWEIGHT',
                 // Catatan: Gambar menyebutkan >= 23.0, tapi Obesity mulai 25.0.
                 // Maka range ini kita set 23.0 - 24.9 agar tidak tumpang tindih.
-                'range' => json_encode(['min' => 23.0, 'max' => 24.9]),
+                'range' => ['min' => 23.0, 'max' => 24.9],
                 'color_hex' => '#ffc107', // Kuning
             ],
             [
                 'type' => 'imt',
                 'status' => 'OBESITY',
-                'range' => json_encode(['min' => 25.0, 'max' => null]), // >= 25.0
+                'range' => ['min' => 25.0, 'max' => null], // >= 25.0
                 'color_hex' => '#dc3545', // Merah
             ],
         ];
@@ -79,41 +79,41 @@ class IndikatorSeeder extends Seeder
             [
                 'type' => 'td',
                 'status' => 'Normal',
-                'range' => json_encode([
+                'range' => [
                     'sys_min' => null, 'sys_max' => 119,
                     'dia_min' => null, 'dia_max' => 79,
                     'operator' => 'AND' // Keduanya harus terpenuhi
-                ]),
+                ],
                 'color_hex' => '#28a745', // Hijau
             ],
             [
                 'type' => 'td',
                 'status' => 'Pre-hipertensi',
-                'range' => json_encode([
+                'range' => [
                     'sys_min' => 120, 'sys_max' => 139,
                     'dia_min' => 80,  'dia_max' => 89,
                     'operator' => 'OR' // Salah satu terpenuhi masuk kategori ini
-                ]),
+                ],
                 'color_hex' => '#ffc107', // Kuning
             ],
             [
                 'type' => 'td',
                 'status' => 'Stadium 1',
-                'range' => json_encode([
+                'range' => [
                     'sys_min' => 140, 'sys_max' => 159,
                     'dia_min' => 90,  'dia_max' => 99,
                     'operator' => 'OR'
-                ]),
+                ],
                 'color_hex' => '#fd7e14', // Oranye Tua
             ],
             [
                 'type' => 'td',
                 'status' => 'Stadium 2',
-                'range' => json_encode([
+                'range' => [
                     'sys_min' => 160, 'sys_max' => null,
                     'dia_min' => 100, 'dia_max' => null,
                     'operator' => 'OR'
-                ]),
+                ],
                 'color_hex' => '#dc3545', // Merah
             ],
         ];
