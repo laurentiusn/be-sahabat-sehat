@@ -152,7 +152,7 @@ class MonitorTdController extends Controller
             'statusCode' => 200,
             'message' => 'Data Monitor Tekanan Darah',
             'data' => [
-                'latestMonitorTd' => $latest->latestMonitorTd,
+                // 'latestMonitorTd' => $latest->latestMonitorTd,
                 'historyTd'       => $historyTd,
             ]
         ], 200);

@@ -30,6 +30,8 @@ Route::prefix('v1')->group(function () {
             //Ubah Indikator
             Route::get('/indikator', [IndikatorController::class, 'index']);
             Route::post('/indikator', [IndikatorController::class, 'store']);
+            Route::get('/indikator/{id}', [IndikatorController::class, 'show']);
+            Route::put('/indikator/{id}', [IndikatorController::class, 'update']);
             Route::delete('/indikator/{id}', [IndikatorController::class, 'destroy']);
 
             //Tips
