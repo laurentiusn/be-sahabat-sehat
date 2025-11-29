@@ -19,19 +19,14 @@ class TipsController extends Controller
     public function index(Request $request)
     {
         // Eager load menggunakan nama relasi 'gambarTips' dan 'indikator'
-        $query = Tips::select('id', 'id_indikator')
-            // Eager load 'indikator' tapi hanya ambil kolom tertentu
-            ->with(['indikator:id,type,status,color_hex']); 
-
-        // Filter Type (Optional)
-        if ($request->has('type')) {
-            $query->whereHas('indikator', function($q) use ($request) {
-                $q->where('type', $request->type);
-            });
-        }
+        $query = Tips::query()
+            ->select('tips.id', 'tips.id_indikator') // Ambil kolom tips yang dibutuhkan
+            ->join('indikator', 'tips.id_indikator', '=', 'indikator.id') // Join ke tabel indikator
+            ->with(['indikator:id,type,status,color_hex']) // Eager load relasi seperti biasa
+            ->orderBy('indikator.type', 'asc');
 
         // Ambil data terbaru
-        $tips = $query->latest()->get();
+        $tips = $query->get();
 
         return response()->json([
             'statusCode' => 200,
