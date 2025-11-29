@@ -19,13 +19,18 @@ class TipsController extends Controller
     public function index(Request $request)
     {
         // Eager load menggunakan nama relasi 'gambarTips' dan 'indikator'
-        $query = Tips::with(['gambarTips', 'indikator']);
+        $query = Tips::select('id', 'id_indikator')
+            // Eager load 'indikator' tapi hanya ambil kolom tertentu
+            ->with(['indikator:id,type,status,color_hex']); 
 
-        // Filter by id_indikator
-        if ($request->has('id_indikator')) {
-            $query->where('id_indikator', $request->query('id_indikator'));
+        // Filter Type (Optional)
+        if ($request->has('type')) {
+            $query->whereHas('indikator', function($q) use ($request) {
+                $q->where('type', $request->type);
+            });
         }
 
+        // Ambil data terbaru
         $tips = $query->latest()->get();
 
         return response()->json([
@@ -50,7 +55,7 @@ class TipsController extends Controller
             'id_indikator' => 'required|exists:indikator,id',
             'konten'       => 'required|string',
             'images'       => 'required|array|max:5', // Maksimal 5 gambar
-            'images.*'     => 'required|image|mimes:jpeg,png,jpg|max:2048', // Validasi tiap file
+            'images.*'     => 'required|image|mimes:jpeg,png,jpg|max:10240', // Validasi tiap file
         ]);
 
         if ($validator->fails()) {
@@ -135,7 +140,7 @@ class TipsController extends Controller
 
             // Array file gambar baru untuk ditambahkan
             'new_images'          => 'nullable|array',
-            'new_images.*'        => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'new_images.*'        => 'required|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
         if ($validator->fails()) {

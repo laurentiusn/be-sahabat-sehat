@@ -36,10 +36,11 @@ Route::prefix('v1')->group(function () {
 
             //Tips
             Route::get('/tips', [TipsController::class, 'index']);
-            Route::post('/tips', [TipsController::class, 'store']);
+            // Route::post('/tips', [TipsController::class, 'store']);
             Route::get('/tips/{id}', [TipsController::class, 'show']);
             Route::put('/tips/{id}', [TipsController::class, 'update']);
-            Route::delete('/tips/{id}', [TipsController::class, 'destroy']);
+            Route::patch('/tips/{id}', [TipsController::class, 'update']);
+            // Route::delete('/tips/{id}', [TipsController::class, 'destroy']);
 
             
             //Lihat Monitoring User
