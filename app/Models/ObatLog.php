@@ -21,8 +21,8 @@ class ObatLog extends Model
     ];
 
     protected $casts = [
-        'jadwal_konsumsi' => 'date:d-m-Y',
-        'waktu_aktual_konsumsi' => 'datetime:d-m-Y H:i:s',
+        'jadwal_konsumsi' => 'date',
+        'waktu_aktual_konsumsi' => 'datetime',
     ];
 
     public function obat(): BelongsTo
