@@ -17,7 +17,7 @@ class IndikatorController extends Controller
      */
     public function index()
     {
-        $query = Indikator::select(['type', 'status', 'range', 'color_hex'])
+        $query = Indikator::select(['id','type', 'status', 'range', 'color_hex'])
                 ->orderBy('type', 'asc')        
                 ->get();
 
