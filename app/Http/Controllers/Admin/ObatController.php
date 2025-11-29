@@ -201,13 +201,12 @@ class ObatController extends Controller
 
         // 3. Modifikasi data agar mudah dipakai Frontend
         // Kita tambahkan status "Aktif/Non-Aktif" berdasarkan tanggal hari ini
-        $formattedData = $daftarObat->map(function($item) {
+        $today = now()->startOfDay();
+        $formattedData = $daftarObat->map(function($item) use ($today) {
             
             // Cek apakah obat masih aktif (Hari ini <= End Date)
             // Carbon::createFromFormat karena cast model kita d-m-Y
-            $endDate = Carbon::createFromFormat('d-m-Y', $item->end_date);
-            $today   = Carbon::today();
-            $isActive = $endDate->greaterThanOrEqualTo($today);
+            $isActive = $today->between($item->start_date, $item->end_date);
 
             return [
                 'id'         => $item->id,
@@ -216,7 +215,7 @@ class ObatController extends Controller
                 'dosis'      => $item->dosis,
                 
                 // Format Rentang Tanggal untuk UI: "01-11-2025 s.d 05-11-2025"
-                'rentang'    => $item->start_date . ' s.d ' . $item->end_date,
+                'rentang'    => $item->start_date->format('d-m-Y') . ' s.d ' . $item->end_date->format('d-m-Y'),
                 
                 // Status tambahan untuk styling di frontend (Opsional)
                 // Jika false, frontend bisa bikin text jadi abu-abu/disabled

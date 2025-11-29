@@ -25,8 +25,8 @@ class Obat extends Model
     ];
 
     protected $casts = [
-        'start_date'  => 'date:d-m-Y',
-        'end_date'    => 'date:d-m-Y',
+        'start_date'  => 'date',
+        'end_date'    => 'date',
     ];
 
     public function user(): BelongsTo
