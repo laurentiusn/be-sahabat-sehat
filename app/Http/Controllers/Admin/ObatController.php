@@ -94,7 +94,7 @@ class ObatController extends Controller
             foreach ($period as $date) {
                 ObatLog::create([
                     'id_obat'         => $obat->id,
-                    'jadwal_konsumsi' => $date->format('d-m-Y'), // Di DB tetap Y-m-d
+                    'jadwal_konsumsi' => $date->format('Y-m-d'), // Di DB tetap Y-m-d
                     'status'          => 'belum',
                 ]);
             }
