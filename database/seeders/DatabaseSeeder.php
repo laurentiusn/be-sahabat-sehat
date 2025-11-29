@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tips;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             IndikatorSeeder::class,
             UserSeeder::class,
+            TipsSeeder::class,
         ]);
     }
 }
