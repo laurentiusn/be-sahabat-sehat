@@ -19,6 +19,7 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:api')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
+        Route::get('/indikator', [IndikatorController::class, 'index']);
 
         Route::middleware(Admin::class)->group(function () {
             //Dashboard
@@ -28,7 +29,7 @@ Route::prefix('v1')->group(function () {
             Route::delete('/pasien/{id}', [AdminController::class, 'destroy']);
 
             //Ubah Indikator
-            Route::get('/indikator', [IndikatorController::class, 'index']);
+            // Route::get('/indikator', [IndikatorController::class, 'index']);
             Route::post('/indikator', [IndikatorController::class, 'store']);
             Route::get('/indikator/{id}', [IndikatorController::class, 'show']);
             Route::put('/indikator/{id}', [IndikatorController::class, 'update']);
