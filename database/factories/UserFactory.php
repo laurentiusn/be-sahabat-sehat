@@ -23,10 +23,21 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $faker = \Faker\Factory::create('id_ID');
+
         return [
-            'nama_lengkap' => fake()->name(),
-            'tanggal_lahir' => fake()->date('Y-m-d'),
-            'role' => 'pasien', // Atau fake()->randomElement(['admin', 'pasien'])
+            'nama_lengkap'  => $faker->name(),
+            // Tanggal lahir random, umur antara 20 - 60 tahun
+            'tanggal_lahir' => $faker->dateTimeBetween('-60 years', '-20 years')->format('Y-m-d'),
+            'tempat_lahir'  => $faker->city(),
+            'jenis_kelamin' => $faker->randomElement(['laki-laki', 'perempuan']),
+            'alamat'        => $faker->address(),
+            // NIK 16 digit angka unique
+            'nik'           => $faker->unique()->numerify('16##############'),
+            // No HP unique
+            'no_hp'         => $faker->unique()->phoneNumber(),
+            // Kita set default ke pasien karena tujuannya buat list pasien
+            'role'          => 'pasien', 
         ];
     }
 
