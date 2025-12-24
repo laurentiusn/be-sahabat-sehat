@@ -11,6 +11,10 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
+        $request->validate([
+            'search' => ['nullable','string','max:255'],
+            'page'   => ['nullable','integer','min:1']
+        ]);
         // 1. Query Dasar
         $query = User::where('role', 'pasien')
             ->with(['latestMonitorTd', 'latestMonitorGd', 'latestMonitorImt']);
@@ -55,9 +59,11 @@ class AdminController extends Controller
             // Metadata Pagination untuk Frontend (Next/Prev button)
             'meta'       => [
                 'current_page' => $pasiens->currentPage(),
+                'from'         => $pasiens->firstItem(), // Item urutan ke berapa (misal: 11)
                 'last_page'    => $pasiens->lastPage(),
                 'per_page'     => $pasiens->perPage(),
-                'total'        => $pasiens->total(),
+                'to'           => $pasiens->lastItem(),  // Sampai item ke berapa (misal: 20)
+                'total'        => $pasiens->total(),     // Total semua data di DB
             ]
         ]);
     }
