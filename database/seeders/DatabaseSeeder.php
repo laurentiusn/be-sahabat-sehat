@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Middleware\Pasien;
 use App\Models\Tips;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
             IndikatorSeeder::class,
             UserSeeder::class,
             TipsSeeder::class,
+            PasienDummySeeder::class,
         ]);
     }
 }
